@@ -256,10 +256,9 @@ function	OnSTOP_CMD ()
 	MyState = IDLE_ST
 	MyDestX = 0
 	MyDestY = 0
-	MyEnemy = 0
-	EnemyPosX = {0,0,0,0,0,0,0,0,0,0}
-	EnemyPosY = {0,0,0,0,0,0,0,0,0,0}
-	MySkill = 0
+       MyEnemy = 0
+       ResetEnemyPositions()
+       MySkill = 0
 
 end
 
@@ -287,10 +286,9 @@ function	OnATTACK_AREA_CMD (x,y)
 	end
 	MyDestX = x
 	MyDestY = y
-	MyEnemy = 0
-	EnemyPosX = {0,0,0,0,0,0,0,0,0,0}
-	EnemyPosY = {0,0,0,0,0,0,0,0,0,0}
-	MyState = ATTACK_AREA_CMD_ST
+       MyEnemy = 0
+       ResetEnemyPositions()
+       MyState = ATTACK_AREA_CMD_ST
 	
 end
 
@@ -311,12 +309,11 @@ function	OnHOLD_CMD ()
 
 	TraceAI ("OnHOLD_CMD")
 	logappend("AAI_ERROR","HOLD_CMD sent! This should NEVER HAPPEN!")
-	MyDestX = 0
-	MyDestY = 0
-	MyEnemy = 0
-	EnemyPosX = {0,0,0,0,0,0,0,0,0,0}
-	EnemyPosY = {0,0,0,0,0,0,0,0,0,0}
-	MyState = HOLD_CMD_ST
+       MyDestX = 0
+       MyDestY = 0
+       MyEnemy = 0
+       ResetEnemyPositions()
+       MyState = HOLD_CMD_ST
 
 end
 
@@ -377,21 +374,19 @@ function	OnFOLLOW_CMD ()
 			ShouldStandby=1
 		end
 		BetterMoveToOwner (MyID,FollowStayBack)
-		MyState = FOLLOW_CMD_ST
-		MyEnemy = 0 
-		EnemyPosX = {0,0,0,0,0,0,0,0,0,0}
-		EnemyPosY = {0,0,0,0,0,0,0,0,0,0}
-		MySkill = 0
+               MyState = FOLLOW_CMD_ST
+               MyEnemy = 0
+               ResetEnemyPositions()
+               MySkill = 0
 		TraceAI ("OnFOLLOW_CMD")
 	else
 		if StickyStandby > 0 then
 			ShouldStandby=0
 		end
-		MyState = IDLE_ST
-		MyEnemy = 0 
-		EnemyPosX = {0,0,0,0,0,0,0,0,0,0}
-		EnemyPosY = {0,0,0,0,0,0,0,0,0,0}
-		MySkill = 0
+               MyState = IDLE_ST
+               MyEnemy = 0
+               ResetEnemyPositions()
+               MySkill = 0
 		TraceAI ("FOLLOW_CMD_ST --> IDLE_ST")
 	end
 
@@ -453,12 +448,17 @@ function ResetCounters()
 	SkillObjectCMDTimeout	= 0
 	FollowTryCount			= 0
 	MyMoveX,MyMoveY			= 0,0
-	if CastSkillMode < 0 then
-		CastSkill=0
-		CastSkillLevel=0
-		CastSkillMode=0
-	end
-	return
+       if CastSkillMode < 0 then
+               CastSkill=0
+               CastSkillLevel=0
+               CastSkillMode=0
+       end
+       return
+end
+
+function ResetEnemyPositions()
+       EnemyPosX = {0,0,0,0,0,0,0,0,0,0}
+       EnemyPosY = {0,0,0,0,0,0,0,0,0,0}
 end
 
 --###############################
@@ -963,20 +963,18 @@ end
 function OnATTACK_ST ()
 	TraceAI ("OnATTACK_ST MyEnemy: "..MyEnemy.." MyPos "..formatpos(GetV(V_POSITION,MyID)).." ("..GetV(V_MOTION,MyID)..") enemypos "..formatpos(GetV(V_POSITION,MyEnemy)).." ("..GetV(V_MOTION,MyEnemy)..") MyTarget: "..GetV(V_TARGET,MyID))	
 	if (true == IsOutOfSight(MyID,MyEnemy)) then -- first thing's first, if enemy is gone drop it. 
-		MyState = IDLE_ST
-		MyEnemy = 0
-		EnemyPosX = {0,0,0,0,0,0,0,0,0,0}
-		EnemyPosY = {0,0,0,0,0,0,0,0,0,0}
-		MySkillUseCount= 0
+               MyState = IDLE_ST
+               MyEnemy = 0
+               ResetEnemyPositions()
+               MySkillUseCount= 0
 		TraceAI ("ATTACK_ST -> IDLE_ST -- target gone")
 		return OnIDLE_ST()
 	end
 	if (MOTION_DEAD == GetV(V_MOTION,MyEnemy)) then   -- Enemy dead? Okay we're done here - drop it. 
-		MyState = IDLE_ST
-		MyEnemy = 0
-		EnemyPosX = {0,0,0,0,0,0,0,0,0,0}
-		EnemyPosY = {0,0,0,0,0,0,0,0,0,0}
-		MySkillUseCount= 0
+               MyState = IDLE_ST
+               MyEnemy = 0
+               ResetEnemyPositions()
+               MySkillUseCount= 0
 		TraceAI ("ATTACK_ST -> IDLE_ST  Enemy dead")
 		return OnIDLE_ST()
 	end
@@ -994,12 +992,11 @@ function OnATTACK_ST ()
 				Move(MyID,tx,ty)
 				TraceAI("ATTACK_ST: We've been attacking for 3 cycles, but we still haven't attacked! Something is wrong - Moving to adjust opposite")
 			elseif AttackGiveUpCount > AttackGiveUp and MyEnemies[AttackGiveUp]==MyEnemy and MyStates[AttackGiveUp]==ATTACK_ST then
-				MyState = IDLE_ST
-				Unreachable[MyEnemy]=1
-				MyEnemy = 0
-				EnemyPosX = {0,0,0,0,0,0,0,0,0,0}
-				EnemyPosY = {0,0,0,0,0,0,0,0,0,0}
-				MySkillUseCount= 0
+                               MyState = IDLE_ST
+                               Unreachable[MyEnemy]=1
+                               MyEnemy = 0
+                               ResetEnemyPositions()
+                               MySkillUseCount= 0
 				TraceAI("ATTACK_ST -> IDLE_ST - We've been attacking for 5 cycles, tried moving around, and still haven't attacked it. Marking unreachable")
 				return OnIDLE_ST()
 			end
@@ -1022,12 +1019,11 @@ function OnATTACK_ST ()
 		end
 	end
 	if (AttackTimeout < GetTick() and AttackTimeLimit > 0) then -- Attack time limit reached.
-		MyState = FOLLOW_ST
-		Unreachable[MyEnemy]=1
-		MyEnemy = 0
-		EnemyPosX = {0,0,0,0,0,0,0,0,0,0}
-		EnemyPosY = {0,0,0,0,0,0,0,0,0,0}
-		MySkillUseCount= 0
+               MyState = FOLLOW_ST
+               Unreachable[MyEnemy]=1
+               MyEnemy = 0
+               ResetEnemyPositions()
+               MySkillUseCount= 0
 		TraceAI ("ATTACK_ST -> FOLLOW_ST -- attack timeout reached, so we're probably posbugged. Dropping target and returning to owner in the hope that that sorts it out")
 		return OnFOLLOW_ST()
 	end
@@ -3151,12 +3147,11 @@ function AI(myid)
 		TraceAI("double-AI() call detected, blocked")
 		return
 	else
-		if LastAITime + 400 < GetTick() and LastAITime > 10 then
-			TraceAI("Missed AI calls. Previous AI call was "..LastAITime-GetTick().." ms ago")
-			logappend("AAI_SKILLFAIL", "Missed AI calls. Previous AI call was "..LastAITime-GetTick().." ms ago")
-			EnemyPosX = {0,0,0,0,0,0,0,0,0,0} --When we miss AI calls, that means our predictive motion is probly screwed up
-			EnemyPosY = {0,0,0,0,0,0,0,0,0,0} --so flush this to prevent homun from getting confused by it, 
-		end
+               if LastAITime + 400 < GetTick() and LastAITime > 10 then
+                       TraceAI("Missed AI calls. Previous AI call was "..LastAITime-GetTick().." ms ago")
+                       logappend("AAI_SKILLFAIL", "Missed AI calls. Previous AI call was "..LastAITime-GetTick().." ms ago")
+                       ResetEnemyPositions() -- predictive motion history is invalid
+               end
 		LastAIDelay=GetTick()-LastAITime
 		LastAITime=GetTick()
 		if MyEnemy ~= 0 then
