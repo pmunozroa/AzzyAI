@@ -13,7 +13,7 @@ UseIdleWalk              = 0
 IdleWalkSP               = 80
 IdleWalkDistance         = 4
 RelativeRoute            = 1
-AutoDetectPlants		=1
+AutoDetectPlant		=1
 FleeHP                   = 0
 
 -- Attack skill options
