@@ -147,14 +147,15 @@ namespace AzzyAIConfig
         Disabled = 0,
         Enabled = 1
     }
-	enum LavaSlideModeOptions : sbyte
-	{
-		Attack = 0,
-		Idle = 1,
-		Chase = -1,
-		Idle_Low = -2,
-        Berserk = 2
-	}
+        enum LavaSlideModeOptions : sbyte
+        {
+                Attack = 0,
+                Idle = 1,
+                Chase = -1,
+                Idle_Low = -2,
+        Berserk = 2,
+        Self = 3
+        }
 	enum PoisonMistModeOptions : sbyte
 	{
 		Attack = 0,
@@ -2712,7 +2713,8 @@ LavaSlideModeOptions _LavaSlideMode = LavaSlideModeOptions.Attack;
 	[Category("Autobuff Options"),
 	Description(
         "If set to anything except 'attack', Lava Slide will be cast at the owner's feet - This improves exp/hr while AFKing on maps like OD2, and also makes it easier for others on the map. This is handled like a buff skill; 'Idle' is the recommended setting." +
-		"If set to 'attack', Lava Slide will be used as an AoE attack (controlled by the AutoMobMode AutoMobCount settings). This is recommended only for non-AFK leveling. " +
+                "If set to 'attack', Lava Slide will be used as an AoE attack (controlled by the AutoMobMode AutoMobCount settings). This is recommended only for non-AFK leveling. " +
+        "Use 'Self' to cast the skill centered on Dieter instead of the owner." +
         "Note that the AI cannot detect when Lava Slide is canceled, so either way, it will assume it lasts 7.5 seconds, and may try to recast after that"
 		),
 	DefaultValue(LavaSlideModeOptions.Attack)]
