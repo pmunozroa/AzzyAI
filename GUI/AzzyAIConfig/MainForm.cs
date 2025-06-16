@@ -231,7 +231,7 @@ namespace AzzyAIConfig
             //AzzyAIAboutBox about = new AzzyAIAboutBox();
             // Show the about box
             //about.ShowDialog();
-            MessageBox.Show("Azzy AI v1.54\nAI written by Dr. Azzy\nGUI written by Machiavellian with multiple extensions by Dr. Azzy\n(C) 2009-2014\n\nIcon by Kami Kali","AzzyAI 1.54", MessageBoxButtons.OK);
+            MessageBox.Show("Azzy AI v1.61\nAI written by Dr. Azzy\nGUI written by Machiavellian with multiple extensions by Dr. Azzy\n(C) 2009-2014\n\nIcon by Kami Kali","AzzyAI 1.61", MessageBoxButtons.OK);
         }
 
         private void homunculusSettingsToolStripMenuItem_Click(object sender, EventArgs e)

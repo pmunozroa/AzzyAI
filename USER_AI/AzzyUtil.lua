@@ -1,10 +1,10 @@
 -------------------------------
--- This file is part of AzzyAI 1.55
+-- This file is part of AzzyAI 1.61
 -- If you want to use these functions in your own AI
 -- it is reccomended that you use the seperately available
 -- version, which does not utilize AAI-specific systems. 
 -- Written by Dr. Azzy of iRO Chaos
-AUVersion="1.56"
+AUVersion="1.61"
 -------------------------------
 
 

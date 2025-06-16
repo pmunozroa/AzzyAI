@@ -1,3 +1,6 @@
+1.61:
+* Version bump to 1.61
+
 1.56:
 * Add support for taking over /AI
 * Added Lava Slide self-targeting mode (LavaSlideMode = 3)
