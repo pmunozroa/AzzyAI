@@ -390,6 +390,13 @@ function	OnFOLLOW_CMD ()
 		TraceAI ("FOLLOW_CMD_ST --> IDLE_ST")
 	end
 
+function OnORBIT_CMD()
+        TraceAI("OnORBIT_CMD")
+        OrbitWalkStep=0
+        NextOrbitWalkTime=GetTick()
+        MyState=ORBITWALK_ST
+end
+
 end
 
 
@@ -424,6 +431,9 @@ function	ProcessCommand (msg)
 	elseif	(msg[1] == FOLLOW_CMD) then
 		TraceAI ("FOLLOW_CMD")
 		OnFOLLOW_CMD ()
+        elseif  (msg[1] == ORBIT_CMD) then
+                TraceAI ("ORBIT_CMD")
+                OnORBIT_CMD ()
 	end
 end
 
@@ -2940,6 +2950,16 @@ function GetIdleWalkDest(MyID)
 	end
 end
 --######################
+function OnORBITWALK_ST()
+    if GetTick() < NextOrbitWalkTime then return end
+    local ox,oy = GetV(V_POSITION,GetV(V_OWNER,MyID))
+    local steps = {{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1},{1,-1}}
+    OrbitWalkStep = (OrbitWalkStep % #steps) + 1
+    local dx,dy = steps[OrbitWalkStep][1],steps[OrbitWalkStep][2]
+    Move(MyID, ox+dx, oy+dy)
+    NextOrbitWalkTime = GetTick() + 1000
+end
+
 --### DoAutoPushback ###
 --######################
 

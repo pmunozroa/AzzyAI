@@ -163,6 +163,7 @@ HOLD_CMD			= 6
 SKILL_OBJECT_CMD		= 7
 SKILL_AREA_CMD			= 8
 FOLLOW_CMD			= 9
+ORBIT_CMD			= 10
 --------------------------
 
 --------------------------
@@ -447,7 +448,8 @@ TankHitTimeout			= 0
 SkillObjectCMDTimeout   = 0
 AshTimeout 				= {0,0,0}
 --Advanced movement stuff
---OrbitWalkStep			= 0
+OrbitWalkStep                   = 0
+NextOrbitWalkTime               = 0
 IdleWalkTries			= 0
 RouteWalkStep			= nil
 RouteWalkDirection		= 1

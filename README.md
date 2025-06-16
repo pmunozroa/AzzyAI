@@ -9,6 +9,7 @@ I no longer play RO, and do not have time to take it up or maintain this AI exce
 * DEFAULT contains the default AI
 * USER_AI contains AzzyAI
   * Includes recent refactoring for better performance
+  * Adds ORBIT_CMD for spinning around the owner
 * scripts contains scripts used to prepare releases of AzzyAI
 * AzzyAIConfig contains the source code for the config tool
 
