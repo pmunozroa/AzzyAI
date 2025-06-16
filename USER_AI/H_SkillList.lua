@@ -1,4 +1,4 @@
--- H_SkillList.lua	v1.50.1
+-- H_SkillList.lua	v1.61
 -- Converted to Lua by Dr. Azzy from
 -- Mercenary skill list posted by Neo Saro -and-
 -- Homun S skill list ganked from some pserver site.

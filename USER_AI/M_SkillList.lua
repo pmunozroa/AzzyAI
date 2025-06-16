@@ -1,4 +1,4 @@
--- M_SkillList.lua	v1.50
+-- M_SkillList.lua	v1.61
 -- The skill lists are separated because the idiots used the same numbers for homun and merc types!
 -- Converted to Lua by Dr. Azzy from
 -- Mercenary skill list posted by Neo Saro -and-

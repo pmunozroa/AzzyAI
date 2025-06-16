@@ -1,5 +1,5 @@
 -- AzzyAI Constant File
-CVersion="1.552"
+CVersion="1.61"
 
 --[[
 function	TraceAI (string) end
@@ -13,7 +13,7 @@ function	GetMsg (id) end
 function	GetResMsg (id) end
 function	SkillObject (id,level,skill,target) end
 function	SkillGround (id,level,skill,x,y) end
-function	IsMonster (id) end								-- id´Â ¸ó½ºÅÍÀÎ°¡? yes -> 1 no -> 0
+function	IsMonster (id) end								-- idÂ´Ã‚ Â¸Ã³Â½ÂºÃ…ÃÃ€ÃÂ°Â¡? yes -> 1 no -> 0
 
 --]]
 --GetV() first argument--
