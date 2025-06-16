@@ -2479,7 +2479,7 @@ function DoAutoBuffs(buffmode)
 	if SightTimeout ~=-1 then
 		TraceAI("tick:"..GetTick().."SightTimeout"..SightTimeout)
 		if (GetTick() > SightTimeout) then
-			local skill,level,opt = GetSightOrAoE(MyID)
+                        local skill,level,opt,selftgt = GetSightOrAoE(MyID)
 			if (skill <= 0) then
 				SightTimeout = -1
 			elseif level==0 or opt~=buffmode then
@@ -2493,7 +2493,11 @@ function DoAutoBuffs(buffmode)
 					else
 						MyPState = MyState
 						MyState = PROVOKE_ST
-						MyPEnemy = GetV(V_OWNER,MyID)
+                                                if selftgt==1 then
+                                                        MyPEnemy = MyID
+                                                else
+                                                        MyPEnemy = GetV(V_OWNER,MyID)
+                                                end
 						MyPSkill = skill
 						MyPSkillLevel = level
 						MyPMode = 7

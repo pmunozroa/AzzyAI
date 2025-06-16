@@ -2135,6 +2135,7 @@ function	GetSOffensiveSkill(myid)
 	local level = 0
 	local skill = 0
 	local skillopt = 0
+        local selftarget = 0
 	if (IsHomun(myid)==1) then
 		htype=GetV(V_HOMUNTYPE,myid)
 		if (htype==BAYERI and UseBayeriAngriffModus~=0) then
@@ -2146,7 +2147,7 @@ function	GetSOffensiveSkill(myid)
 			level = 5
 			skillopt=UseDieterMagmaFlow
 		end
-		return skill,level,skillopt
+		return skill,level,skillopt,selftarget
 	else
 		level=SkillList[MercType][MER_BLESSING]
 		if level~=nil then
@@ -2173,7 +2174,7 @@ function	GetSDefensiveSkill(myid)
 			level = 5
 			skillopt=UseDieterGraniticArmor
 		end
-		return skill,level,skillopt
+		return skill,level,skillopt,selftarget
 	else
 		level=SkillList[MercType][MER_KYRIE]
 		if level~=nil then
@@ -2190,6 +2191,7 @@ function	GetSOwnerBuffSkill(myid)
 	local level = 0
 	local skill = 0
 	local skillopt = 0
+        local selftarget = 0
 	if (IsHomun(myid)==1) then
 		htype=GetV(V_HOMUNTYPE,myid)
 		if (htype==EIRA and UseEiraOveredBoost~=0) then
@@ -2205,7 +2207,7 @@ function	GetSOwnerBuffSkill(myid)
 			end
 			skillopt=UseDieterPyroclastic
 		end
-		return skill,level,skillopt
+		return skill,level,skillopt,selftarget
 	else
 		level=SkillList[MercType][MER_INCAGI]
 		if level~=nil then
@@ -2222,12 +2224,16 @@ function GetSightOrAoE(myid)
 	local level = 0
 	local skill = 0
 	local skillopt = 0
+        local selftarget = 0
 	if (IsHomun(myid)==1) then
 		htype=GetV(V_HOMUNTYPE,myid)
 		if	(htype==DIETER and UseDieterLavaSlide==1 and LavaSlideMode~=0) then
 			skill=MH_LAVA_SLIDE
 			level = 10
 			skillopt=LavaSlideMode
+                        if LavaSlideMode==3 then
+                                selftarget=1
+                        end
 		elseif (htype==SERA and PoisonMistMode~=0 and UseSeraPoisonMist==1) then
 			skill=MH_POISON_MIST
 			level = 5
@@ -2246,7 +2252,7 @@ function GetSightOrAoE(myid)
 			skill=skill
 		end
 	end
-	return skill,level,skillopt
+	return skill,level,skillopt,selftarget
 end
 function	GetGuardSkill(myid)
 	local level = 0
@@ -2297,6 +2303,7 @@ function	GetOffensiveOwnerSkill(myid)
 	local level = 0
 	local skill = 0
 	local skillopt = 0
+        local selftarget = 0
 	if (IsHomun(myid)==1) then
 		return 0,0,0
 	else
@@ -2313,6 +2320,7 @@ function	GetDefensiveOwnerSkill(myid)
 	local level = 0
 	local skill = 0
 	local skillopt = 0
+        local selftarget = 0
 	if (IsHomun(myid)==1) then
 		if GetV(V_HOMUNTYPE,MyID)==SERA and UseSeraPainkiller~=0 then
 			level=5
@@ -2334,6 +2342,7 @@ function	GetOtherOwnerSkill(myid)
 	local level = 0
 	local skill = 0
 	local skillopt = 0
+        local selftarget = 0
 	if (IsHomun(myid)==1) then
 		return 0,0,0
 	else

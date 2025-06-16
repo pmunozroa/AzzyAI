@@ -10,3 +10,6 @@ I no longer play RO, and do not have time to take it up or maintain this AI exce
 * USER_AI contains AzzyAI
 * scripts contains scripts used to prepare releases of AzzyAI
 * AzzyAIConfig contains the source code for the config tool
+
+### New Option
+* LavaSlideMode now supports "Self" to cast at Dieter instead of the owner.

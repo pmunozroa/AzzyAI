@@ -1,6 +1,7 @@
 1.56:
 * Add support for taking over /AI
-* Fix issue with pauses bugging up predictive move. 
+* Added Lava Slide self-targeting mode (LavaSlideMode = 3)
+* Fix issue with pauses bugging up predictive move.
 * Corrected issue that could cause rescuer to get distracted .
 * Corrected issue where state of skill use count could be lost.
 * Corrected issue with Tanking tactic.
